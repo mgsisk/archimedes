@@ -1,43 +1,61 @@
 /*
-Theme Name: Archimedies
-Theme URI: http://maikeruon.com/webcomic/
-Description: The perfect starter theme for building your own <a href="http://maikeruon.com/webcomic/">Webcomic</a> powered site.
-Version: 1.0.0
+Theme Name: Archimedes
+Theme URI: http://webcomicms.net/
+Description: A skeleton theme for building your own Webcomic-powered WordPress theme.
 Author: Michael Sisk
-Author URI: http://maikeruon.com/
+Version: 3.0.8
 */
 
-/** Load the Cascade Failure CSS Framework */
-@import url( 'includes/css/cf-reset.css' );
-@import url( 'includes/css/cf-layout.css' );
-@import url( 'includes/css/cf-typography.css' );
+/** Reset */
+address,article,blockquote,body,caption,col,colgroup,dd,dialog,div,dl,dt,fieldset,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,hr,nav,legend,li,menu,ol,p,pre,section,table,tbody,td,tfoot,th,thead,tr,ul,a,abbr,b,bdo,br,cite,code,del,dfn,em,i,ins,kbd,label,mark,meter,progress,q,rp,rt,ruby,samp,small,span,strong,sub,sup,time,var,audio,canvas,embed,figure,figcapture,iframe,img,math,object,svg,video {
+	border:          0;
+	margin:          0;
+	outline:         0;
+	padding:         0;
+	border-spacing:  0;
+	list-style:      none;
+	color:           inherit;
+	font-size:       inherit;
+	font-style:      inherit;
+	text-align:      inherit;
+	font-weight:     inherit;
+	font-family:     inherit;
+	line-height:     inherit;
+	text-decoration: inherit;
+	vertical-align:  baseline;
+	border-collapse: separate;
+	background:      transparent; }
+article,dialog,figure,figcapture,footer,header,hgroup,legend,nav,section { display: block; }
 
-/** Page settings */
-html    { margin: 2em; }
-
-/** Set the site width */
-.group { width: 64em; }
-
-/** #head */
-#head .name        { font-size: 300%; line-height: 1em; margin: 0 0 .25em }
-#head .description { font-size: 115%; font-style: italic; margin: 0 0 1em; }
-#head .navi        { border-color: #ccc; border-style: solid; border-width: 1px 0;float: left; list-style: none; margin: 0 0 1em; padding: 0; width: 100%; }
-#head .navi li     { float: left; }
-#head .navi a      { display: block; padding: 1em; }
-#head .navi ul     { display: none; }
-
-/** .comic */
-.comic .navi a              { margin: 0 0 0 1em; }
-.comic .navi .current-comic { display: none; }
-
-/** .blog-title */
-.blog-title { font-size: 250%; line-height: 1em; margin: 1em 0 .5em; }
-
-/** .sidebar */
-.sidebar { list-style: none; margin: 0; padding: 0; }
-
-#comic .navi   { border-bottom: 1px solid #ccc; margin: 0 0 1em; }
-#comic .navi a { padding: 0 1em; }
-
-/** #foot */
-#foot { border-top: 1px solid #ccc; margin: 1em 0 0; padding: 1em 0 0; }
+/** Basic Styling */
+html                       { background :#fff; color: #333; font: 100%/1.5em geneva, verdana, tahoma, sans-serif; padding: 1.5em; }
+a                          { color: #363; transition: all .1s ease-in-out; -moz-transition: all .1s ease-in-out; -webkit-transition: all .1s ease-in-out; }
+a:hover                    { color: #393; }
+abbr                       { border-bottom: 1px dotted; cursor: help; }
+b,dfn,strong               { font-weight: bolder; }
+blockquote                 { margin: 0 3em; }
+address,cite,em,i,var      { font-style: italic; }
+code,kbd,pre,var,samp      { font-family: menlo, consolas, courier, monospace; }
+del                        { text-decoration: line-through; }
+ins                        { text-decoration: underline; }
+mark                       { text-decoration: overline; }
+pre                        { margin: 0 0 1.5em; white-space: pre-wrap; }
+p                          { margin: 0 0 1.5em; }
+small                      { font-size: smaller; }
+sub                        { vertical-align: sub; }
+sup                        { vertical-align: super; }
+sub,sup                    { font-size: smaller; line-height: 0; }
+h1                         { font-size: 200%; font-weight: bold; line-height: 1em; margin: 0 0 .75em; }
+h2                         { font-size: 150%; font-weight: bold; line-height: 1em; margin: 0 0 1em; }
+h3                         { font-size: 125%; font-weight: bold; line-height: 1em; margin: 0 0 1.2em; }
+h4                         { font-size: 100%; font-weight: bold; line-height: 1em; margin: 0 0 1.5em; }
+h5                         { font-size: 85%; font-weight: bold; line-height: 1em; margin: 0 0 1.75em; }
+h6                         { font-size: 75%; font-weight: bold; line-height: 1em; margin: 0 0 2em; }
+hr                         { clear: both; }
+ol li                      { list-style: decimal; }
+ul li                      { list-style: disc; }
+menu li                    { list-style: circle; }
+ol,ul,menu                 { margin: 0 0 1.5em 3em; }
+ul ul,ul ol,ol ol,ol ul,dd { margin: 0 0 0 3em; }
+dl,dialog                  { margin: 0 0 1.5em; }
+dt                         { font-weight: bolder; }

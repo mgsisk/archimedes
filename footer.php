@@ -1,8 +1,6 @@
-	</div> <!-- #body -->
-	<div id="foot" class="group align-center">
-		<p><?php bloginfo( 'name' ); ?> is proudly powered by <a href="http://wordpress.org/">WordPress</a> with <a href="http://maikeruon.com/wcib/">WebComic</a></p>
-	</div>
-</div> <!-- #page -->
-<?php wp_footer(); ?>
+		</section><!-- #main -->
+		<footer id="footer"><hr><?php wp_meta(); /* see functions.php hook_wp_meta */ ?></footer><!-- #footer -->
+	</div><!-- #wrap -->
+	<?php wp_footer(); ?>
 </body>
 </html>

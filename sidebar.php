@@ -1,30 +1,8 @@
-<ul class="sidebar small alignright">
-	<?php if( !dynamic_sidebar() ) : ?>
-	
-	<li>
-		<h2>Comic Buffer</h2>
-		<p><?php the_comic_buffer(); ?></p>
-	</li>
-	
-	<li>
-		<h2>Bookmark Comic</h2>
-		<p><?php bookmark_comic(); ?></p>
-	</li>
-	
-	<li>
-		<h2>Dropdown Comics</h2>
-		<p><?php dropdown_comics(); ?></p>
-	</li>
-	
-	<li>
-		<h2>Random Comic</h2>
-		<p><?php random_comic_link(); ?></p>
-	</li>
-	
-	<li>
-		<h2>Recent Comics</h2>
-		<ul><?php recent_comics(); ?></ul>
-	</li>
-	
-	<?php endif; ?>
-</ul>
+<aside id="sidebar">
+<?php if ( !dynamic_sidebar( 'archimedes-sidebar' ) ) { //see functions.php hook_init ?>
+	<figure>
+		<figcapture><?php _e( 'Sidebar', 'archimedes' ); ?></figcapture>
+		<?php _e( 'This area is widgetized. You can add widgets by going to <em>Appearance > Widgets</em> in the administrative dashboard. Adding widgets will remove this message.', 'archimedes' ); ?>
+	</figure>
+<?php } ?>
+</aside>
