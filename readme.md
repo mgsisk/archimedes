@@ -1,0 +1,1 @@
+Archimedes is a skeleton theme for building your own (Webcomic-powered)[http://github.com/mgsisk/webcomic] WordPress theme.
