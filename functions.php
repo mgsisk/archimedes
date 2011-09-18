@@ -1,0 +1,1 @@
+<?php register_sidebar(); ?>

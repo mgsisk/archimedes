@@ -1,0 +1,43 @@
+/*
+Theme Name: Archimedies
+Theme URI: http://maikeruon.com/webcomic/
+Description: The perfect starter theme for building your own <a href="http://maikeruon.com/webcomic/">Webcomic</a> powered site.
+Version: 1.0.0
+Author: Michael Sisk
+Author URI: http://maikeruon.com/
+*/
+
+/** Load the Cascade Failure CSS Framework */
+@import url( 'includes/css/cf-reset.css' );
+@import url( 'includes/css/cf-layout.css' );
+@import url( 'includes/css/cf-typography.css' );
+
+/** Page settings */
+html    { margin: 2em; }
+
+/** Set the site width */
+.group { width: 64em; }
+
+/** #head */
+#head .name        { font-size: 300%; line-height: 1em; margin: 0 0 .25em }
+#head .description { font-size: 115%; font-style: italic; margin: 0 0 1em; }
+#head .navi        { border-color: #ccc; border-style: solid; border-width: 1px 0;float: left; list-style: none; margin: 0 0 1em; padding: 0; width: 100%; }
+#head .navi li     { float: left; }
+#head .navi a      { display: block; padding: 1em; }
+#head .navi ul     { display: none; }
+
+/** .comic */
+.comic .navi a              { margin: 0 0 0 1em; }
+.comic .navi .current-comic { display: none; }
+
+/** .blog-title */
+.blog-title { font-size: 250%; line-height: 1em; margin: 1em 0 .5em; }
+
+/** .sidebar */
+.sidebar { list-style: none; margin: 0; padding: 0; }
+
+#comic .navi   { border-bottom: 1px solid #ccc; margin: 0 0 1em; }
+#comic .navi a { padding: 0 1em; }
+
+/** #foot */
+#foot { border-top: 1px solid #ccc; margin: 1em 0 0; padding: 1em 0 0; }
