@@ -218,7 +218,7 @@ class inkblot extends mgs_core {
 			'include'    => false,
 			'exclude'    => false,
 			'columns'    => false,
-			'captiontag' => 'figcapture'
+			'captiontag' => 'figcaption'
 		), $attr ) );
 		
 		$id          = intval( $id );
