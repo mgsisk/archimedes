@@ -123,7 +123,14 @@
 		<?php if ( have_posts() ) { ?>
 		<h1><?php printf( __( 'Search Results for %s', 'archimedes' ), '<q>' . esc_html( get_search_query() ) . '</q>' ); ?></h1>
 		
-		<!-- need loop here!!! -->
+		<?php while ( have_posts() ) { the_post(); ?>
+		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<?php if ( 'webcomic_post' === get_post_type() ) { the_webcomic_object( 'full', 'self' ); } ?>
+			<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+			<?php the_content(); ?>
+			<footer><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a> | <?php the_date(); ?> @ <?php the_time(); ?> | <?php comments_popup_link(); edit_post_link( NULL, ' | ' ); ?></footer>
+		</article><!-- #post-<?php the_ID(); ?> -->
+		<?php } ?>
 		
 		<?php } else { ?>
 		<article id="post-0" class="post no-results not-found">
@@ -163,7 +170,14 @@
 		<?php } else { ?><h1><?php _e( 'Archives', 'archimedes' ); ?></h1>
 		<?php } rewind_posts(); ?>
 		
-		<!-- need loop here!!! -->
+		<?php while ( have_posts() ) { the_post(); ?>
+		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<?php if ( 'webcomic_post' === get_post_type() ) { the_webcomic_object( 'full', 'self' ); } ?>
+			<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+			<?php the_content(); ?>
+			<footer><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a> | <?php the_date(); ?> @ <?php the_time(); ?> | <?php comments_popup_link(); edit_post_link( NULL, ' | ' ); ?></footer>
+		</article><!-- #post-<?php the_ID(); ?> -->
+		<?php } ?>
 		
 	<?php } elseif ( is_404() ) { //404.php ?>
 		
