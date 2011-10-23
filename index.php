@@ -125,7 +125,7 @@
 		
 		<?php while ( have_posts() ) { the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-			<?php if ( 'webcomic_post' === get_post_type() ) { the_webcomic_object( 'full', 'self' ); } ?>
+			<?php if ( 'webcomic_post' === get_post_type() ) { the_webcomic_object( 'small', 'self' ); } ?>
 			<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 			<?php the_content(); ?>
 			<footer><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a> | <?php the_date(); ?> @ <?php the_time(); ?> | <?php comments_popup_link(); edit_post_link( NULL, ' | ' ); ?></footer>
@@ -172,7 +172,7 @@
 		
 		<?php while ( have_posts() ) { the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-			<?php if ( 'webcomic_post' === get_post_type() ) { the_webcomic_object( 'full', 'self' ); } ?>
+			<?php if ( 'webcomic_post' === get_post_type() ) { the_webcomic_object( 'small', 'self' ); } ?>
 			<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 			<?php the_content(); ?>
 			<footer><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a> | <?php the_date(); ?> @ <?php the_time(); ?> | <?php comments_popup_link(); edit_post_link( NULL, ' | ' ); ?></footer>
