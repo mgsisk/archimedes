@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php global $webcomic; get_header(); ?>
 
 <div id="main">
 	<section id="content">
@@ -147,8 +147,8 @@
 			<?php } else { ?>
 				<h1><?php printf( __( 'Posts by %s', 'archimedes' ), get_the_author() ); ?></h1>
 			<?php } ?>
-		<?php } elseif ( is_tax( 'webcomic_collection' ) ) { ?><h1><?php printf( __( 'Webcomics from %s', 'archimedes' ), get_webcomic_collection_info( 'name' ) ); ?></h1>
-		<?php } elseif ( is_tax( 'webcomic_storyline' ) ) { ?><h2><?php printf( __( 'Webcomics in %s', 'archimedes' ), get_webcomic_storyline_info( 'name' ) ); ?></h2>
+		<?php } elseif ( is_tax( 'webcomic_collection' ) ) { ?><h1><?php printf( __( 'Webcomics from %s', 'archimedes' ), $webcomic->get_webcomic_term_info( 'name', 'webcomic_collection' ) ); ?></h1>
+		<?php } elseif ( is_tax( 'webcomic_storyline' ) ) { ?><h2><?php printf( __( 'Webcomics in %s', 'archimedes' ), $webcomic->get_webcomic_term_info( 'name', 'webcomic_storyline' ) ); ?></h2>
 		<?php } elseif ( is_tax( 'webcomic_character' ) ) { query_posts( $query_string . '&order=ASC' ); //Show the characters first appearance first ?>
 			<?php if ( !is_paged() ) { //Show character info on the first page only ?>
 			<h1><?php webcomic_character_info( 'name' ); ?></h1>
@@ -156,9 +156,9 @@
 			<?php webcomic_character_info( 'description' ); ?>
 			<nav><?php previous_webcomic_character_link( '%link', '&laquo; %name' ); next_webcomic_character_link( '%link', '%name &raquo;' ); ?></nav>
 			<hr>
-			<h2><?php printf( __( 'Appearances by %s', 'archimedes' ), get_webcomic_character_info( 'name' ) ); ?></h2>
+			<h2><?php printf( __( 'Appearances by %s', 'archimedes' ), $webcomic->get_webcomic_term_info( 'name', 'webcomic_character' ) ); ?></h2>
 			<?php } else { ?>
-			<h1><?php printf( __( 'Appearances by %s', 'archimedes' ), get_webcomic_character_info( 'name' ) ); ?></h1>
+			<h1><?php printf( __( 'Appearances by %s', 'archimedes' ), $webcomic->get_webcomic_term_info( 'name', 'webcomic_character' ) ); ?></h1>
 			<?php } ?>
 		<?php } else { ?><h1><?php _e( 'Archives', 'archimedes' ); ?></h1>
 		<?php } rewind_posts(); ?>
