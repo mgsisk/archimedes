@@ -1,8 +1,6 @@
 <?php
 /** Contains the ArchimedesTag class and template tag functions.
  * 
- * Theme-specific template tags should go in this file.
- * 
  * @package Archimedes
  */
 
@@ -11,7 +9,8 @@
  * @package Archimedes
  */
 class ArchimedesTag extends Archimedes {
-	/** Override the parent constructor. */
+	/** Override the parent constructor.
+	 */
 	public function __construct(){}
 	
 	/** Return appropriate `<meta>` description text.
@@ -23,7 +22,7 @@ class ArchimedesTag extends Archimedes {
 		
 		if ( is_singular() and !is_home() ) {
 			if ( post_password_required( $wp_query->get_queried_object() ) ) {
-				$output = __( 'There is no excerpt because this is a protected post.', 'archimedes' );
+				$output = __( 'There is no description because this is a protected post.', 'archimedes' );
 			} else if ( !$output = $wp_query->get_queried_object()->post_excerpt ) {
 				$output = apply_filters( 'wp_trim_excerpt', wp_trim_words( str_replace( ']]>', ']]&gt;', apply_filters( 'the_content', strip_shortcodes( $wp_query->get_queried_object()->post_content ) ) ), apply_filters( 'excerpt_length', 55 ), apply_filters( 'excerpt_more', ' [...]' ) ) );
 			}
@@ -33,9 +32,9 @@ class ArchimedesTag extends Archimedes {
 			$output = get_bloginfo( 'description', 'display' );
 		}
 		
-		$output = 140 < strlen( $output = strip_tags( $output ) ) ? esc_attr( substr( $output, 0, 139 ) . '&hellip;' ) : esc_attr( $output );
+		$output = 140 < strlen( $output = strip_tags( $output ) ) ? substr( $output, 0, 132 ) . '&hellip;' : $output;
 		
-		return $output;
+		return esc_attr( $output );
 	}
 	
 	/** Return posts paged navigation.
@@ -49,16 +48,16 @@ class ArchimedesTag extends Archimedes {
 		global $wp_query;
 	
 		if ( $wp_query->max_num_pages > 1 ) {
-			return sprintf( '<nav role="navigation" class="posts%s">%s</nav>%s',
-				$class ? ' ' . join( ' ', ( array ) $class ) : '',
+			$class = array_merge( array( 'posts-paged' ), ( array ) $class );
+			
+			return sprintf( '<nav class="%s">%s</nav><!-- .posts-paged -->',
+				join( ' ', ( array ) $class ),
 				$paged ? preg_replace( '/>...</', '>&hellip;<', paginate_links( array_merge( array(
 					'base'    => str_replace( 999999999, '%#%', get_pagenum_link( 999999999 ) ),
 					'total'   => $wp_query->max_num_pages,
 					'format'  => '?paged=%#%',
 					'current' => max( 1, get_query_var( 'paged' ) )
-				), ( array ) $args ) ) )
-				: get_posts_nav_link( ( array ) $args ),
-				$class ? sprintf( '<!-- .posts%s -->', ' .' . str_replace( ' ', ' .', join( ' .', ( array ) $class ) ) ) : ''
+				), ( array ) $args ) ) ) : get_posts_nav_link( ( array ) $args )
 			);
 		}
 	}
@@ -73,13 +72,13 @@ class ArchimedesTag extends Archimedes {
 	 */
 	public static function archimedes_comments_nav( $class = '', $paged = array(), $previous = '', $next = '' ) {
 		if ( 1 < get_comment_pages_count() and get_option( 'page_comments' ) ) {
-			return sprintf( '<nav role="navigation" class="comments%s">%s</nav>%s',
-				$class ? ' ' . join( ' ', ( array ) $class ) : '',
+			$class = array_merge( array( 'comments-paged' ), ( array ) $class );
+			
+			return sprintf( '<nav class="%s">%s</nav><!-- .comments-paged -->',
+				join( ' ', ( array ) $class ),
 				$paged ? paginate_comments_links( array_merge( array(
 					'echo' => false
-				), ( array ) $paged ) )
-				: get_previous_comments_link( $previous ) . get_next_comments_link( $next ),
-				$class ? sprintf( '<!-- .comments%s -->', ' .' . str_replace( ' ', ' .', join( ' .', ( array ) $class ) ) ) : ''
+				), ( array ) $paged ) ) : get_previous_comments_link( $previous ) . get_next_comments_link( $next )
 			);
 		}
 	}
@@ -87,30 +86,82 @@ class ArchimedesTag extends Archimedes {
 	/** Return post meta information.
 	 * 
 	 * @return string
+	 * @uses WebcomicTag::webcomic_collection_link()
+	 * @uses WebcomicTag::get_the_webcomic_term_list()
+	 * @uses WebcomicTag::get_the_webcomic_term_list()
+	 * @uses is_a_webcomic()
+	 * @uses webcomic_prints_available()
 	 */
 	public static function archimedes_post_meta() {
 		global $post;
 		
-		$edit_post_link = current_user_can( 'edit_post' ) ? sprintf( __( '<a href="%s" class="post-edit-link">Edit This</a>', 'archimedes' ), get_edit_post_link() ) : '';
-		
-		return is_attachment() ? sprintf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time datetime="%3$s" pubdate>%4$s</time></a> in <a href="%5$s" title="Return to %6$s" rel="gallery">%7$s</a>%8$s', 'webcomic' ),
+		$edit = $media = $parent = $categories = $tags = $collection = $storylines = $characters = $transcribe = $purchase = '';
+		$date = sprintf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time datetime="%3$s">%4$s</time></a>', 'archimedes' ),
 			esc_url( get_permalink() ),
 			esc_attr( get_the_time() ),
 			esc_attr( get_the_date( 'c' ) ),
-			esc_html( get_the_date() ),
-			esc_url( get_permalink( $post->post_parent ) ),
-			esc_attr( strip_tags( get_the_title( $post->post_parent ) ) ),
-			get_the_title( $post->post_parent ),
-			$edit_post_link
-		) : sprintf( __( '<a href="%1$s" rel="author">%2$s</a> on <a href="%3$s" title="%4$s" rel="bookmark"><time datetime="%5$s" pubdate>%6$s</time></a>%7$s', 'archimedes' ),
-			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-			get_the_author(),
-			esc_url( get_permalink() ),
-			esc_attr( get_the_time() ),
-			esc_attr( get_the_date( 'c' ) ),
-			esc_html( get_the_date() ),
-			$edit_post_link
+			esc_html( get_the_date() )
 		);
+		$author = sprintf( __( '<a href="%1$s" rel="author">%2$s</a>', 'archimedes' ),
+			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+			get_the_author()
+		);
+		
+		
+		if ( current_user_can( 'edit_post' ) ) {
+			$edit = sprintf( __( '<a href="%s" class="post-edit-link">Edit This</a>', 'archimedes' ), get_edit_post_link() );
+		}
+		
+		if ( webcomic() and is_a_webcomic() ) {
+			if ( webcomic_transcripts_open() ) {
+				$transcribe = WebcomicTag::webcomic_transcripts_link( '%link' );
+			}
+			
+			if ( webcomic_prints_available() ) {
+				$purchase = WebcomicTag::purchase_webcomic_link( '%link', __( 'Purchase', 'archimedes' ) );
+			}
+			
+			$collection = WebcomicTag::webcomic_collection_link( '%link', '%title' );
+			$storylines = WebcomicTag::get_the_webcomic_term_list( 0, 'sotyrline' );
+			$characters = WebcomicTag::get_the_webcomic_term_list( 0, 'character' );
+			
+			if ( $storylines and $characters ) {
+				$meta = __( 'Published in %8$s as part of %9$s featuring %10$s on %3$s by %4$s<span class="post-actions">%11$s%12$s%7$s</span>', 'archimedes' );
+			} else if ( $storylines ) {
+				$meta = __( 'Published in %8$s as part of %9$s on %3$s by %4$s<span class="post-actions">%11$s%12$s%7$s</span>', 'archimedes' );
+			} else if ( $characters ) {
+				$meta = __( 'Published in %8$s featuring %10$s on %3$s by %4$s<span class="post-actions">%11$s%12$s%7$s</span>', 'archimedes' );
+			} else {
+				$meta = __( 'Published in %8$s on %3$s by %4$s<span class="post-actions">%11$s%12$s%7$s</span>', 'archimedes' );
+			}
+		} else if ( is_attachment() ) {
+			$data  = wp_get_attachment_metadata();
+			$media = sprintf( __( '<a href="%1$s" title="Link to full-size image">%2$s &times; %3$s</a>', 'archimedes' ),
+				esc_url( wp_get_attachment_url() ),
+				$data[ 'width' ],
+				$data[ 'height' ]
+			);
+			$parent = sprintf( __( '<a href="%1$s" title="Return to %2$s" rel="gallery">%3$s</a>', 'archimedes' ),
+				esc_url( get_permalink( $post->post_parent ) ),
+				esc_attr( strip_tags( get_the_title( $post->post_parent ) ) ),
+				get_the_title( $post->post_parent )
+			);
+			
+			$meta = __( 'Published in %5$s at %6$s on %3$s<span class="post-actions">%7$s</span>', 'archimedes' );
+		} else {
+			$tags = get_the_tag_list( '', __( ', ', 'archimedes' ) );
+			$categories = get_the_category_list( __( ', ', 'archimedes' ) );
+			
+			if ( $tags ) {
+				$meta = __( 'Published in %1$s and tagged %2$s on %3$s by %4$s<span class="post-actions">%7$s</span>', 'archimedes' );
+			} else if ( $categories ) {
+				$meta = __( 'Published in %1$s on %3$s by %4$s<span class="post-actions">%7$s</span>', 'archimedes' );
+			} else {
+				$meta = __( 'Published on %3$s by %4$s<span class="post-actions">%7$s</span>', 'archimedes' );
+			}
+		} 
+		
+		return sprintf( $meta, $categories, $tags, $date, $author, $parent, $media, $edit, $collection, $storylines, $characters, $transcribe, $purchase );
 	}
 	
 	/** Return a unique search form ID.
@@ -130,7 +181,7 @@ class ArchimedesTag extends Archimedes {
 	
 	/** Return copyright notice.
 	  * 
-	 * @param integer $user User ID to use for the copyright name.
+	 * @param integer $user User ID to use for the copyright attribution name.
 	 * @return string
 	 */
 	public static function archimedes_copyright( $user = 0 ) {
@@ -158,7 +209,7 @@ class ArchimedesTag extends Archimedes {
 		<article id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 			<footer class="comment-footer">
 				<?php
-					printf( __( '%1$s%2$s on <a href="%3$s"><time datetime="%4$s" pubdate>%5$s @ %6$s</time></a>', 'archimedes' ),
+					printf( __( '%1$s%2$s on <a href="%3$s"><time datetime="%4$s">%5$s @ %6$s</time></a>', 'archimedes' ),
 						$args[ 'avatar_size' ] ? get_avatar( $comment, $args[ 'avatar_size' ] ) : '',
 						get_comment_author_link(),
 						esc_url( get_comment_link( $comment->comment_ID ) ),
@@ -167,11 +218,13 @@ class ArchimedesTag extends Archimedes {
 						get_comment_time()
 					);
 				?>
-				<?php edit_comment_link(); ?>
-				<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args[ 'max_depth' ] ) ) ); ?>
+				<span class="comment-actions">
+					<?php edit_comment_link(); ?>
+					<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args[ 'max_depth' ] ) ) ); ?>
+				</span>
 			</footer><!-- .comment-footer -->
 			<?php if ( !$comment->comment_approved ) : ?>
-				<div class="moderating"><?php _e( 'Your comment is awaiting moderation.', 'archimedes' ); ?></div><!-- .moderating -->
+				<div class="moderating-comment"><?php _e( 'Your comment is awaiting moderation.', 'archimedes' ); ?></div><!-- .moderating-comment -->
 			<?php endif; ?>
 			<div class="comment-content"><?php comment_text(); ?></div><!-- .comment-content -->
 		<?php
@@ -187,6 +240,15 @@ class ArchimedesTag extends Archimedes {
 		?>
 		</article><!-- #comment-<?php comment_ID(); ?> -->
 		<?php
+	}
+	
+	/** Is this a theme preview?
+	 * 
+	 * @return boolean
+	 * @uses Archimedes::$preview
+	 */
+	public static function archimedes_theme_preview() {
+		return self::$preview;
 	}
 }
 
@@ -260,7 +322,6 @@ if ( !function_exists( 'archimedes_copyright' ) ) {
 }
 
 if ( !function_exists( 'archimedes_start_comment' ) ) {
-	
 	/** Render a comment.
 	 * 
 	 * @param object $comment Comment data object.
@@ -286,16 +347,26 @@ if ( !function_exists( 'archimedes_end_comment' ) ) {
 	}
 }
 
-if ( !function_exists( 'is_a_webcomic' ) ) {
-	/** Always return false if Webcomic isn't active. */
-	function is_a_webcomic() {
-		return false;
+if ( !function_exists( 'archimedes_theme_preview' ) ) {
+	/** Is this a theme preview?
+	 * 
+	 * @return boolean
+	 * @uses ArchimedesTag::archimedes_theme_preview()
+	 */
+	function archimedes_theme_preview() {
+		return ArchimedesTag::archimedes_theme_preview();
 	}
 }
-
-if ( !function_exists( 'is_webcomic' ) ) {
-	/** Always return false if Webcomic isn't active. */
-	function is_webcomic() {
+	
+/** Is a compatible version of Webcomic installed?
+ * 
+ * This function is actually part of the Webcomic plugin. If it
+ * doesn't exist, it's probably safe to always return false.
+ * 
+ * @return boolean
+ */
+if ( !function_exists( 'webcomic' ) ) {
+	function webcomic() {
 		return false;
 	}
 }

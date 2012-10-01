@@ -1,21 +1,26 @@
 # Archimedes - A starter theme for Webcomic.
 
-Archimedes (named in honor of Nite Owl from the Watchmen graphic novel) is a barebones [WordPress](//wordpress.org) starter theme for learning about [Webcomic](http://webcomic.nu) and building Webcomic-powered WordPress themes.
+Archimedes is a barebones [Webcomic](http://webcomic.nu)-ready [WordPress](//wordpress.org) theme named in honor of Nite Owl from the Watchmen graphic novel.
 
 ## Installation
 
-1. Download and extract Archimedes from the [GitHub respository](//github.com/mgsisk/archimedes).
+You can install Inkblot from the **Appearance > Themes > Install Themes** page in the administrative dashboard. Just do a search for `archimedes` and the first result should be the one you're looking for.
+
+### Manual Installation
+
+1. Download and extract Inkblot from the [WordPress Theme directory](//wordpress.org/extend/themes/archimedes).
 2. Upload the `archimedes` directory to your `wp-content/themes` directory.
-3. Activate Archimedes through the **Appearance > Themes** page in the administrative dashboard.
+3. Activate Inkblot through the **Appearance > Themes** page in the administrative dashboard.
 
 ## Frequently Asked Questions
 
-### Where can I get help with Webcomic?
+### Where can I get help with Webcomic (and Archimedes)?
 
-- [Beginner's Guide](//github.com/mgsisk/webcomic/wiki)
-- [Video Tutorials](//vimeo.com/channels/webcomic)
 - [Support Forum](//groups.google.com/d/forum/webcomicnu)
-- [Issue Tracker](//github.com/mgsisk/webcomic/issues)
+- [Inkblot Issue Tracker](//github.com/mgsisk/archimedes/issues)
+- [Beginner's Guide to Webcomic](//github.com/mgsisk/webcomic/wiki)
+- [Webcomic Video Tutorials](//vimeo.com/channels/webcomic)
+- [Webcomic Issue Tracker](//github.com/mgsisk/webcomic/issues)
 - [Email Support](mailto:support@webcomic.nu)
 
 ---

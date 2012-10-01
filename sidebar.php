@@ -1,32 +1,15 @@
 <?php
-/** Main sidebar template.
+/** Standard sidebar template.
  * 
  * @package Archimedes
  */
 ?>
 
-<section id="complementary" role="complementary">
-	
-	<?php if ( !dynamic_sidebar( 'primary-sidebar' ) ) : ?>
-		
-		<aside id="archives" class="widget">
-			
-			<h3><?php _e( 'Sidebar', 'archimedes' ); ?></h3>
-			
-			<p><?php _e( 'This is the theme sidebar. You can remove this message by adding widgets to it from the <strong>Appearance > Widgets</strong> administrative page.', 'archimedes' ); ?></p>
-			
-			<?php if ( is_user_logged_in() ) : ?>
-				
-				<?php wp_register( '<p>', '</p>' ); ?>
-				
-			<?php else : ?>
-				
-				<?php wp_login_form(); ?>
-				
-			<?php endif; ?>
-			
+<div id="sidebar" role="complementary" class="widgets">
+	<?php if ( !dynamic_sidebar( 'primary-sidebar' ) and current_user_can( 'edit_theme_options' ) ) : ?>
+		<aside class="widget">
+			<h1><?php _e( 'Primary Sidebar', 'archimedes' ); ?></h1>
+			<p><?php printf( __( 'This is the primary sidebar. You can remove this message by adding widgets to it from the <a href="%s"><strong>Appearance > Widgets</strong> administrative page</a>.', 'archimedes' ), admin_url( 'widgets.php' ) ); ?></p>
 		</aside>
-		
 	<?php endif; ?>	
-	
-</section><!-- #complementary -->
+</div><!-- #sidebar1 -->

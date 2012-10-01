@@ -1,4 +1,4 @@
-/** normalize.css | MIT License | git.io/normalize | Modified by Michael Sisk */
+/** git.io/normalize | MIT License | Modified by Michael Sisk */
 
 /** Sane box model for all elements. */
 * {
@@ -27,8 +27,6 @@ audio,
 canvas,
 video {
 	display: inline-block;
-    *display: inline;
-    *zoom: 1;
 }
 
 /**
@@ -45,10 +43,17 @@ audio:not([controls]) {
 	display: none;
 }
 
+/** Implement responsive objects. */
+embed,
+iframe,
+object,
+video {
+	max-width: 100%;
+}
+
 /** Implement responsive videos. */
 video {
 	height: auto;
-	max-width: 100%;
 }
 
 /** Remove text shadows from selected text in Firefox. */
@@ -63,10 +68,13 @@ video {
 
 /**
  * Set default font family to sans-serif.
+ * Optimize text rendering for legibility.
  * Prevent iOS text size adjust after orientation change without disabling user zoom.
  */
 html {
 	font-family: sans-serif;
+	font-size: 100%;
+	text-rendering: optimizeLegibility;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
 }
@@ -78,6 +86,11 @@ html {
 body {
 	margin: 0;
 	line-height: 1.5;
+}
+
+/** Show default cursor on unlinked anchors. */
+a:not([href]) {
+	cursor: default;
 }
 
 /** Address `outline` inconsistency between Chrome and other browsers. */
@@ -101,6 +114,7 @@ h1 {
 /** Address styling not present in IE 8 - 9, Safari 5, and Chrome. */
 abbr[title] {
 	border-bottom: thin dotted;
+	cursor: help;
 }
 
 /** Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */

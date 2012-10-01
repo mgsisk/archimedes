@@ -2,46 +2,33 @@
 /** The main template file.
  * 
  * @package Archimedes
+ * @uses webcomic()
  */
 
 get_header(); ?>
 
-<?php if ( class_exists( 'Webcomic' ) ) : ?>
-
+<?php if ( webcomic() ) : ?>
 	<?php get_template_part( 'webcomic/index' ); ?>
-	
+<?php else : ?>
+	<section id="main" role="main">
+		<?php if ( have_posts() ) : ?>
+			<?php archimedes_posts_nav( 'above' ); ?>
+			<?php while ( have_posts() ) : the_post(); ?>
+				<?php get_template_part( 'content', get_post_format() ); ?>
+			<?php endwhile; ?>
+			<?php archimedes_posts_nav( 'below' ); ?>
+		<?php elseif ( current_user_can( 'edit_posts' ) ) : ?>
+			<header class="page-header">
+				<h1><?php _e( 'No Posts', 'archimedes' ); ?></h1>
+			</header><!-- .page-header -->
+			<div class="page-content">
+				<p><?php printf( __( 'Ready to publish your first post? <a href="%s">Start here &raquo;</a>', 'archimedes' ), admin_url( 'post-new.php' ) ); ?></p>
+			</div><!-- .page-content -->
+		<?php else : ?>
+			<?php get_template_part( 'content', 'none' ); ?>
+		<?php endif; ?>
+	</section><!-- #main -->
 <?php endif; ?>
 
-<section id="main" role="main">
-	
-	<?php if ( have_posts() ) : ?>
-		
-		<?php archimedes_posts_nav( 'above' ); ?>
-		
-		<?php while ( have_posts() ) : the_post(); ?>
-			
-			<?php if ( is_a_webcomic() ) : ?>
-				
-				<?php get_template_part( 'content-webcomic', get_post_type() ); ?>
-				
-			<?php else : ?>
-				
-				<?php get_template_part( 'content', get_post_format() ); ?>
-				
-			<?php endif; ?>
-		
-		<?php endwhile; ?>
-			
-		<?php archimedes_posts_nav( 'below' ); ?>
-		
-	<?php else : ?>
-		
-		<?php get_template_part( 'empty', 'home' ); ?>
-		
-	<?php endif; ?>
-	
-</section><!-- #main -->
-
 <?php get_sidebar(); ?>
-
 <?php get_footer(); ?>

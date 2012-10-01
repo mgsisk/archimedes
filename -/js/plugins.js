@@ -1,1 +1,0 @@
-/** Any jQuery plugins used in the theme should be placed in this file. */

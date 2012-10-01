@@ -1,13 +1,13 @@
 <?php
 /** Automagic integration for dynamic requests.
  * 
- * This template will be used for any dynamically-requested
- * webcomics. We're keeping things simple here and just using the
- * webcomic/content-single.php template.
+ * This template is used to render webcomics using Webcomic's
+ * Dynamic Navigation feature. We're just using the
+ * `/webcomic/webcomic.php` template to keep things simple.
  * 
  * @package Archimedes
  * @see github.com/mgsisk/webcomic/wiki/Templates
  */
 ?>
 
-<?php get_template_part( 'webcomic/content-single', get_post_type() ); ?>
+<?php get_template_part( 'webcomic/webcomic', get_post_type() ); ?>

@@ -1,28 +1,38 @@
 /*
 Theme Name: Archimedes
-Theme URI: http://webcomic.nu
+Theme URI: //github.com/mgsisk/archimedes
 Author: Michael Sisk
 Author URI: http://mgsisk.com
 License: GPL2
 License URI: //gnu.org/licenses/gpl-2.0.html
-Version: 1
-Description: Barebones starter theme named in honor of Nite Owl from the Watchmen graphic novel.
-Tags: dark, light, white, black, gray, one-column, two-columns, left-sidebar, right-sidebar, fixed-width, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
+Version: 4
+Description: Barebones <a href="http://webcomic.nu">Webcomic</a>-ready theme named in honor of Nite Owl from the Watchmen graphic novel.
+Tags: light, white, black, gray, two-columns, right-sidebar, fixed-width, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 Webcomic: 4
 */
 
-/** mobile portrait */
-html {
-	font-size: 75%;
-}
-
 body {
-	background: #eee;
+	background: #e8e8e8;
+	color: #333;
+	margin: 1rem;
 }
 
-a {
-	color: #009;
+::-moz-selection {
+	background: #cbdb2a;
+	color: #333;
+}
+
+::selection {
+	background: #cbdb2a;
+	color: #333;
+}
+
+a:link {
+	color: #00addc;
 	text-decoration: none;
+	-moz-transition: color .25s;
+	-ms-transition: color .25s;
+	-o-transition: color .25s;
 	-webkit-transition: color .25s;
 	transition: color .25s;
 }
@@ -38,209 +48,345 @@ a:hover {
 
 a:active {
 	color: #cbdb2a;
-	-webkit-transition: none;
-	transition: none;
+}
+
+address {
+	font-size: smaller;
+	font-style: normal;
+}
+
+blockquote {
+	border: thin solid #ccc;
+	box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 ) inset;
+	padding: 1rem;
+}
+
+blockquote blockquote {
+	margin: 0 0 1rem;
+}
+
+dt {
+	font-weight: bold;
+}
+
+pre {
+	border: thin solid #ccc;
+	box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 ) inset;
+	font-size: smaller;
+	padding: 1rem;
+}
+
+table {
+	width: 100%;
+}
+
+td {
+	border: thin solid #ccc;
+	padding: .5rem;
 }
 
 #page {
 	background: #fff;
-	border: thin solid #ddd;
-	border-radius: .5rem;
-	margin: 1rem;
-	padding: 1rem;
-}
-
-#banner {
-	border-bottom: thin solid #ddd;
-	margin: 0 0 1rem;
-}
-
-#banner hgroup {
-	border-bottom: thin solid #ddd;
-	padding: 0 0 1rem;
-}
-
-#banner h1,
-#banner h2 {
-	margin: 0;
-}
-
-#banner h1 a {
-	color: #333;
-}
-
-#navigation ul ul {
-	display: none;
-	z-index: 99;
-}
-
-#navigation ul ul a {
-	text-indent: 1rem;
-}
-
-#navigation li {
+	border-radius: .25rem;
+	box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 );
+	margin: auto;
 	position: relative;
 }
 
-#navigation li:hover > ul {
-	display: block;
+#header hgroup {
+	padding: 1rem;
 }
 
-#navigation a {
-	color: #999;
-	border-bottom: thin solid #ddd;
-	display: block;
-	line-height: 2;
-}
-
-#navigation a:focus,
-#navigation a:hover,
-#navigation li:hover > a {
+#header hgroup a {
 	color: #333;
+	text-decoration: none;
 }
 
-nav.posts,
-nav.images,
-nav.webcomics,
-nav.post-pages {
-	clear: both;
-	text-align: center;
+#header hgroup a:focus,
+#header hgroup a:hover {
+	opacity: .75;
 }
 
-nav.images img {
-	max-width: 64px;
+#header hgroup a:active {
 	opacity: .5;
 }
 
-nav.images a:hover img {
-	opacity: 1;
+#header h1 {
+	line-height: 1;
+	margin: 0;
 }
 
-article {
-	border-bottom: thin solid #ddd;
+#header h2 {
+	font-size: 100%;
+	font-weight: normal;
+	line-height: 2;
+	margin: 0;
+}
+
+#header nav {
+	border-color: #ccc;
+	border-style: solid;
+	border-width: thin 0;
+}
+
+#header nav:before,
+#header nav:after {
+	content: "";
+	display: table;
+}
+
+#header nav:after {
+	clear: both;
+}
+
+#header nav li {
+	position: relative;
+}
+
+#header nav a {
+	border-bottom: thin dotted;
+	display: block;
+	line-height: 2;
+	padding: 0 1rem;
+	white-space: pre;
+}
+
+#header nav a:focus,
+#header nav a:hover,
+#header li:hover > a,
+#header .current_page_item a,
+#header .current_page_ancestor a {
+	color: #f68b1f;
+}
+
+#header nav a:active {
+	color: #cbdb2a;
+}
+
+#content:before,
+#content:after {
+	content: "";
+	display: table;
+}
+
+#content:after {
+	clear: both;
+}
+
+#main {
+	padding: 1rem;
+}
+
+#sidebar {
+	padding: 1rem;
+}
+
+#footer {
+	border-top: thin solid #ccc;
+	padding: 1rem;
+	text-align: center;
+}
+
+/** navigation */
+nav.posts,
+nav.posts-paged,
+nav.comments-paged {
+	border-bottom: thin solid #ccc;
+	margin: 0 0 1rem;
+	padding: 0 0 1rem;
+	text-align: center;
+}
+
+nav.posts a:first-child,
+nav.comments-paged a:first-child {
+	margin: 0 .5rem 0 0;
+}
+
+nav.posts a:last-child,
+nav.comments-paged a:last-child {
+	margin: 0 0 0 .5rem;
+}
+
+nav.posts a:focus img,
+nav.posts a:hover img {
+	opacity: .5;
+}
+
+nav.post-pages {
+	margin: 0 0 1rem;
+	text-align: center;
+}
+
+/** posts */
+.sticky .post-header h1:before {
+	content: '\2605';
+	padding: 0 .5rem 0 0;
+	vertical-align: baseline;
+}
+
+.post-image {
+	float: right;
+	margin: 0 0 1rem 1rem;
+}
+
+.post-header h1 {
+	margin: 0;
+}
+
+.post-comments-link a {
+	border: thin solid;
+	border-radius: .25rem;
+	font-size: smaller;
+	padding: .5rem;
+}
+
+.post-content {
+	overflow: hidden;
+}
+
+.post-footer {
+	border-bottom: thin solid #ccc;
+	font-size: smaller;
 	margin: 0 0 1rem;
 	padding: 0 0 1rem;
 }
 
-article .post-thumbnail {
-	border: thin solid #ddd;
-	float: right;
-	margin: 0 0 1rem 1rem;
+.post-actions a {
+	border: thin solid;
+	border-radius: .25rem;
+	font-size: smaller;
+	margin: 0 0 0 .5rem;
 	padding: .25rem;
 }
 
-article .post-footer {
-	clear: both;
-}
-
-article .post-edit-link,
-article .comment-edit-link,
-article .comment-reply-link {
-	background: #eee;
-	border: thin solid #ddd;
-	color: #999;
-	font-size: smaller;
-	margin: 0 0 0 .5rem;
-	padding: .1rem .25rem;
-	text-transform: uppercase;
-}
-
-article article {
-	border-top: thin solid #ccc;
-	border-bottom: 0;
-	margin: 1rem 0 0 1rem;
-	padding: 1rem 0 0;
-}
-
-#contentinfo {
-	border-top: thin solid #ddd;
-	margin: 1rem 0 0;
-	padding: 1rem 0 0;
+.attachment .post-image {
+	float: none;
+	margin: 0;
 	text-align: center;
 }
 
-#contentinfo a {
-	color: #999;
+.attachment .post-image img {
+	border-radius: .25rem;
+	box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 );
 }
 
-#contentinfo a:focus,
-#contentinfo a:hover {
-	color: #333;
+.attachment .post-excerpt {
+	text-align: center;
 }
 
-@media only screen and ( min-width: 30em ) { /** mobile landscape */
-	
+/** comments */
+.comment,
+.pingback,
+.trackback {
+	border-bottom: thin solid #ccc;
+	margin: 0 0 1rem;
+	padding: 1rem;
 }
 
-@media only screen and ( min-width: 45em ) { /** tablet portrait */
-	html {
-		font-size: 100%;
-	}
-	
-	#navigation ul ul {
-		background: #fff;
-		outline: thin solid #ddd;
-		position: absolute;
-		white-space: pre;
-	}
-	
-	#navigation ul ul ul {
-		left: 100%;
-		top: 0;
-	}
-	
-	#navigation ul ul a {
-		text-indent: 0;
-	}
-	
-	#navigation li {
-		float: left;
-	}
-	
-	#navigation ul ul li {
-		float: none;
-	}
-		
-	#navigation a {
-		border: 0;
-		padding: .5rem;
-	}
-	
-	#main {
-		float: left;
-		padding: 0 1em 0 0;
-		width: 62%;
-	}
-	
-	#complementary {
-		float: right;
-		padding: 0 0 0 1em;
-		width: 38%;
-	}
+.comment .comment {
+	border: 0;
+	border-left: thin solid #ccc;
+	margin: 0 0 0 1rem;
+	padding: 1rem;
 }
 
-@media only screen and ( min-width: 60em ) { /** tablet landscape */
-	
+.bypostauthor {
+	border: thin solid #ccc;
 }
 
-@media only screen and ( min-width: 75em ) { /** desktop */
-	html {
-		font-size: 125%;
-	}
+.moderating-comment {
+	font-size: smaller;
+	font-style: italic;
+	margin: 1rem 0 0;
 }
 
-@media only screen and ( min-width: 90em ) { /** high definition */
-	
+.comment-footer img {
+	margin: 0 1rem 0 0;
 }
 
-/** WordPress */
+.comment-actions a {
+	border: thin solid;
+	border-radius: .25rem;
+	font-size: smaller;
+	margin: 0 0 0 .5rem;
+	padding: .25rem;
+}
+
+/** forms */
+#commentform label,
+.webcomic-transcribe-form label {
+	display: block;
+	float: left;
+	width: 20%;
+}
+
+#commentform .required,
+.webcomic-transcribe-form .required {
+	background: #0c0;
+	color: #fff;
+	padding: .25rem;
+}
+
+#commentform textarea,
+.webcomic-transcribe-form textarea {
+	height: 10em;
+	width: 100%;
+}
+
+.webcomic-transcript-error,
+.webcomic-transcript-success {
+	font-size: smaller;
+	font-style: italic;
+	margin: 1rem 0 0;
+}
+
+/** webcomic */
+.post-webcomic .webcomic-image {
+	overflow: auto;
+}
+
+.post-webcomic nav {
+	border-color: #ccc;
+	border-style: solid;
+	border-width: thin 0;
+}
+
+.post-webcomic nav:before,
+.post-webcomic nav:after {
+	content: "";
+	display: table;
+}
+
+.post-webcomic nav:after {
+	clear: both;
+}
+
+.post-webcomic nav a {
+	font-size: 200%;
+	float: left;
+	text-align: center;
+	width: 20%;
+}
+
+.post-webcomic nav .current-webcomic {
+	opacity: .25;
+}
+
+.post-webcomic nav.above {
+	border-top: 0;
+}
+
+.webcomic-prints div {
+	margin: 0 0 1rem;
+}
+
+/** wordpress */
 .sticky {
 	
 }
 
 .bypostauthor {
-	border: thin solid #ccc;
-	padding: 1rem 1rem 0;
+	
 }
 
 .alignnone {
@@ -263,16 +409,19 @@ article article {
 }
 
 .wp-caption {
-	background: #fff;
-	border: thin solid #ddd;
 	max-width: 100%;
 	padding: .25rem;
 	text-align: center;
 }
 
+.wp-caption img {
+	border-radius: .25rem;
+	box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 );
+}
+
 .wp-caption-text {
 	font-size: smaller;
-	margin: 0;
+	margin: .5rem 0 0;
 }
 
 .gallery {
@@ -292,14 +441,13 @@ article article {
 }
 
 .gallery-icon img {
-	background: #fff;
-	border: thin solid #ddd;
-	padding: .25rem;
+	border-radius: .25rem;
+	box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 );
 }
 
 .gallery-caption {
 	font-size: smaller;
-	margin: 0;
+	margin: .5rem 0 0;
 }
 
 .gallery-columns-1 .gallery-item {
@@ -338,7 +486,49 @@ article article {
 	width: 11%;
 }
 
-/** H5BP  */
+@media only screen and ( min-width: 45em ) {
+	#header nav ul ul {
+		display: none;
+		z-index: 99;
+	}
+	
+	#header nav li {
+		float: left;
+	}
+	
+	#header nav li:hover > ul {
+		background: rgba( 255, 255, 255, .9 );
+		box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 );
+		display: block;
+		position: absolute;
+	}
+	
+	#header nav ul ul ul {
+		left: 100%;
+		top: 0;
+	}
+	
+	#header nav ul ul li {
+		float: none;
+	}
+	
+	#header nav a:link,
+	#header nav a:visited {
+		border: 0;
+	}
+	
+	#main {
+		float: left;
+		width: 62%;
+	}
+	
+	#sidebar {
+		float: right;
+		width: 38%;
+	}
+}
+
+/** h5bp  */
 .wait {
 	cursor: wait;
 }
@@ -389,8 +579,4 @@ article article {
 
 .cf:after {
     clear: both;
-}
-
-.cf {
-    *zoom: 1;
 }

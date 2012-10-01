@@ -1,10 +1,6 @@
 <?php
 /** Contains the ArchimedesAdmin class.
  * 
- * Functions specific to the administrative dashboard should be
- * placed in this class so they aren't loaded every time any
- * non-administrative page is accessed.
- * 
  * @package Archimedes
  */
 
@@ -13,73 +9,101 @@
  * @package Archimedes
  */
 class ArchimedesAdmin extends Archimedes {
-	/** Register hooks and istantiate the administrative classes. */
+	/** Register hooks and istantiate the administrative classes.
+	 * 
+	 * @uses Archimedes::$dir
+	 * @uses Archimedes::__construct()
+	 * @uses ArchimedesAdmin::admin_menu()
+	 * @uses ArchimedesAdmin::after_switch_theme()
+	 */
 	public function __construct() {
 		parent::__construct();
+		
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 99 );
+		add_action( 'after_switch_theme', array( $this, 'after_switch_theme' ) );
 	}
 	
-	/** Render inline styles for admin header customization. */
-	public static function admin_header_style() { ?>
+	/** Register customization page.
+	 * 
+	 * @hook admin_menu
+	 */
+	function admin_menu() {
+		add_theme_page( __( 'Customize', 'archimedes' ), __( 'Customize', 'archimedes' ), 'edit_theme_options', 'customize.php' );
+	}
+	
+	/** Activation hook.
+	 * 
+	 * @hook after_switch_theme
+	 */
+	public function after_switch_theme() {
+		if ( get_theme_mod( 'uninstall', false ) ) {
+			remove_theme_mods();
+		}
+		
+		set_theme_mod( 'version', self::$version );
+	}
+	
+	/** Render custom header preview styles.
+	 */
+	public static function admin_head() { ?>
 		<style>
-			.appearance_page_custom-header #headimg {
-				border: none;
-				box-shadow: 0 0 .25em rgba( 0, 0, 0, .25 );
-			}
-			
 			#headimg {
-				position: relative;
+				font: 130%/1.5 sans-serif;
 			}
 			
-			#headimg img {
-				vertical-align: bottom;
-			}
-			
-			#name {
-				display: block;
-				font: bold 200%/1 'Helvetica Neue', Helvetica, sans-serif;
-				margin: 0;
-			}
-			
-			#desc {
-				display: block;
-				font: bold 150%/1 'Helvetica Neue', Helvetica, sans-serif;
-				margin: 0;
-				text-shadow: none;
+			#headimg div {
+				padding: 1rem;
 			}
 			
 			#headimg a {
+				color: #333;
 				text-decoration: none;
 			}
 			
-			#headimg img {
-				max-width: 1000px;
-				height: auto;
-				width: 100%;
+			#headimg a:focus,
+			#headimg a:hover {
+				opacity: .75;
+			}
+			
+			#headimg a:active {
+				opacity: .25;
+			}
+			
+			#headimg h1 {
+				line-height: 1;
+				margin: 0;
+			}
+			
+			#headimg h2 {
+				font-size: 100%;
+				font-weight: normal;
+				line-height: 2;
+				margin: 0;
 			}
 			<?php
-				if ( get_header_image() ) {
-					echo '#headimg div { margin: 1.5em; position: absolute; }';
-				}
-				
-				if ( get_theme_support( 'custom-header', 'default-text-color' ) !== get_header_textcolor() ) {
-					printf( '#name, #desc { color: #%s }', get_header_textcolor() );
+				if ( $header_textcolor = get_header_textcolor() ) {
+					if ( 'blank' === $header_textcolor ) {
+						echo '#headimg div { display: none; }';
+					} else {
+						printf( '#headimg div, #headimg a { color: #%s; }', $header_textcolor );
+					}
 				}
 			?>
 		</style>
-	<?php
+		<?php
 	}
 	
-	/** Render customized header in the admin dashboard. */
-	public static function admin_header_preview() {
-		$color = get_header_textcolor();
-		$style = ( 'blank' === $color or '' === $color ) ? 'display:none !important;visibility:hidden' : "color:#{$color}";
-		?>
+	/** Render custom header preview HTML.
+	 */
+	public static function admin_preview() { ?>
 		<div id="headimg">
 			<div>
-				<a id="name" href="#" onClick="return false;" style="<?php echo $style; ?>"><?php bloginfo( 'name' ); ?></a>
-				<span id="desc" style="<?php echo $style; ?>"><?php bloginfo( 'description' ); ?></span>
+				<h1><a id="name" href="<?php echo esc_url( home_url() ); ?>" rel="home" onclick="return false;"><?php bloginfo( 'name' ); ?></a></h1>
+				<h2 id="desc"><?php bloginfo( 'description' ); ?></h2>
 			</div>
-			<?php echo ( $image = get_header_image() ) ? sprintf( '<img src="%s" alt="%s">', $image, esc_attr( get_bloginfo( 'name' ) ) ) : ''; ?>
+			<?php if ( $header = get_custom_header() and $header->url ) : ?>
+				<a href="<?php echo esc_url( home_url() ); ?>" rel="home" onclick="return false;"><img src="<?php header_image(); ?>" width="<?php echo $header->width; ?>" height="<?php echo $header->height; ?>" alt=""></a>
+			<?php endif; ?>
 		</div>
 		<?php
 	}

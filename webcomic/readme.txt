@@ -1,1 +1,0 @@
-This directory contains templates specific to the [Webcomic](http://webcomic.nu) plugin. For more information about Webcomic and how to use these templates please see [The Beginner's Guide to Webcomic](//github.com/mgsisk/webcomic/wiki).

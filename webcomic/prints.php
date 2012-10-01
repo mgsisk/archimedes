@@ -2,8 +2,7 @@
 /** Webcomic prints template.
  * 
  * This template is similar to the `single.php` template, but used
- * specifically for displaying webcomic print purchasing options in
- * a unique way.
+ * specifically for displaying webcomic print purchasing options.
  * 
  * @package Archimedes
  * @see github.com/mgsisk/webcomic/wiki/Templates
@@ -12,37 +11,35 @@
 get_header(); ?>
 
 <section id="main" role="main">
-	
-	<?php if ( webcomic_prints_available() ) : ?>
-		
-		<?php get_template_part( 'webcomic/content', get_post_type() ); ?>
-		
-		<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?>>
-			
-			<header class="post-header">
-					
-					<h1><?php printf( __( 'Purchase %s', 'archimedes' ), get_the_title() ); ?></h1>
-				
-			</header><!-- .post-header -->
-			
-			<div class="post-content">
-				
-				<p><?php webcomic_print_form( 'domestic', __( '%total', 'archimedes' ) ); ?></p>
-				
-				<p><?php webcomic_print_form( 'international', __( '%total (international orders)', 'archimedes' ) ); ?></p>
-				
-				<?php if ( webcomic_prints_available( true ) ) : ?>
-					
-					<p><?php webcomic_print_form( 'original', __( '%total (original print)', 'archimedes' ) ); ?></p>
-					
-				<?php endif; ?>
-				
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<div class="post-webcomic">
+			<div class="webcomic-image">
+				<?php the_webcomic( 'large' ); ?>
+			</div><!-- .webcomic-image -->
+		</div><!-- .post-webcomic -->
+		<header class="post-header">
+			<h1><?php the_title(); ?></h1>
+		</header><!-- .post-header -->
+		<footer class="post-footer">
+			<?php archimedes_post_meta(); ?>
+		</footer><!-- .post-footer -->
+		<div class="post-excerpt">
+			<?php the_excerpt(); ?>
+		</div>
+		<div class="webcomic-prints">
+			<?php if ( webcomic_prints_available( true ) ) : ?>
+			<div class="webcomic-prints-original">
+				<?php webcomic_print_form( 'original', __( '%total Original Print', 'archimedes' ) ); ?>
 			</div>
-		
-	<?php endif; ?>
-	
+			<?php endif; ?>
+			<div class="webcomic-prints-domestic">
+				<?php webcomic_print_form( 'domestic', __( '%total Domestic', 'archimedes' ) ); ?>
+			</div>
+			<div class="webcomic-prints-international">
+				<?php webcomic_print_form( 'international', __( '%total International', 'archimedes' ) ); ?>
+			</div>
+		</div>
 </section><!-- #main -->
 
 <?php get_sidebar(); ?>
-
 <?php get_footer(); ?>

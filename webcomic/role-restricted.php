@@ -12,25 +12,13 @@
 get_header(); ?>
 
 <section id="main" role="main">
-	
-	<article id="post-0" class="post webcomic-restricted">
-		
-		<header class="post-header">
-			
-			<h1><?php _e( 'Restricted Content', 'archimedes' ); ?></h1>
-			
-		</header><!-- .post-header -->
-		
-		<div class="post-content">
-			
-			<p><?php _e( "You don't have permission to view this content.", 'archimedes' ); ?></p>
-			
-		</div>
-	
-	</article><!-- #post-0 -->
-	
+	<header class="page-header">
+		<h1><?php _e( 'Restricted Content', 'archimedes' ); ?></h1>
+	</header><!-- .page-header -->
+	<div class="page-content">
+		<p><?php _e( "Apologies, but you don't have permission to view this content.", 'archimedes' ); ?></p>
+	</div><!-- .page-content -->
 </section><!-- #main -->
 
 <?php get_sidebar(); ?>
-
 <?php get_footer(); ?>
