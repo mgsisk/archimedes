@@ -14,6 +14,9 @@ if ( !function_exists( 'get_theme_mod' ) ) {
 	return;
 }
 
+locate_template( array( '-/css/normalize.css' ), true, true );
+locate_template( array( 'style.css' ), true, true );
+
 $css = array();
 
 if ( $header_textcolor = get_header_textcolor() ) {
@@ -38,3 +41,5 @@ if ( $background_image = get_background_image() ) {
 foreach ( $css as $k => $v ) {
 	printf( '%s{%s}', $k, join( ';', ( array ) $v ) );
 }
+
+locate_template( array( 'custom.css' ), true, true );

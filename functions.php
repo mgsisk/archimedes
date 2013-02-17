@@ -60,12 +60,12 @@ class Archimedes {
 		self::$dir = trailingslashit( get_template_directory() );
 		self::$url = trailingslashit( get_template_directory_uri() );
 		
-		add_action( 'wp_head', function_exists( 'archimedes_head' ) ? 'archimedes_head' : array( $this, 'head' ), 0 );
-		add_action( 'wp_title', function_exists( 'archimedes_title' ) ? 'archimedes_title' : array( $this, 'title' ), 10, 3 );
-		add_action( 'wp_loaded', function_exists( 'archimedes_wp_loaded' ) ? 'archimedes_wp_loaded' : array( $this, 'loaded' ) );
+		add_action( 'wp_head', function_exists( 'archimedes_head' ) ? 'archimedes_head' : array( $this, 'wp_head' ), 0 );
+		add_action( 'wp_title', function_exists( 'archimedes_title' ) ? 'archimedes_title' : array( $this, 'wp_title' ), 10, 3 );
+		add_action( 'wp_loaded', function_exists( 'archimedes_wp_loaded' ) ? 'archimedes_wp_loaded' : array( $this, 'wp_loaded' ) );
 		add_action( 'widgets_init', function_exists( 'archimedes_widgets_init' ) ? 'archimedes_widgets_init' : array( $this, 'widgets_init' ) );
 		add_action( 'wp_head', function_exists( 'archimedes_customize_head' ) ? 'archimedes_customize_head' : array( $this, 'customize_head' ) );
-		add_action( 'wp_enqueue_scripts', function_exists( 'archimedes_enqueue_scripts' ) ? 'archimedes_enqueue_scripts' : array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', function_exists( 'archimedes_enqueue_scripts' ) ? 'archimedes_enqueue_scripts' : array( $this, 'wp_enqueue_scripts' ) );
 		add_action( 'after_setup_theme', function_exists( 'archimedes_after_setup_theme' ) ? 'archimedes_after_setup_theme' : array( $this, 'after_setup_theme' ) );
 		add_action( 'customize_register', function_exists( 'archimedes_customize_register' ) ? 'archimedes_customize_register' : array( $this, 'customize_register' ), 10, 1 );
 		
@@ -134,7 +134,7 @@ class Archimedes {
 	 * @uses archimedes_page_description()
 	 * @hook wp_head
 	 */
-	public function head() { ?>
+	public function wp_head() { ?>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="description" content="<?php archimedes_page_description(); ?>">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
@@ -152,8 +152,12 @@ class Archimedes {
 	 * @return string
 	 * @hook wp_title
 	 */
-	public function title( $title, $sep, $location ) {
+	public function wp_title( $title, $sep, $location ) {
 		global $page, $paged;
+		
+		if ( is_feed() ) {
+			return $title;
+		}
 		
 		$name        = get_bloginfo( 'name' );
 		$title       = explode( " {$sep} ", $title );
@@ -180,8 +184,8 @@ class Archimedes {
 	 * @uses Archimedes::$dir
 	 * @action wp_loaded
 	 */
-	public function loaded() {
-		if ( !empty( $_GET[ 'archimedes_custom_styles' ] ) ) {
+	public function wp_loaded() {
+		if ( isset( $_GET[ 'archimedes_styles' ] ) ) {
 			header( 'Content-Type: text/css' );
 			
 			require_once self::$dir . '-/php/style.php';
@@ -214,16 +218,12 @@ class Archimedes {
 	 * @uses Archimedes::$preview
 	 * @hook wp_enqueue_scripts
 	 */
-	public function enqueue_scripts() {
-		wp_register_style( 'archimedes-normalize', self::$url . '-/css/normalize.css' );
-		wp_register_style( 'archimedes-theme', get_stylesheet_uri(), array( 'archimedes-normalize' ) );
+	public function wp_enqueue_scripts() {
+		wp_enqueue_style( 'archimedes-theme', add_query_arg( array( 'archimedes_styles' => '' ), home_url( '/' ) ) );
+		
 		wp_register_script( 'jquery', '', '', '', true);
 		
-		wp_enqueue_script( 'modernizr', self::$url . '-/js/modernizr.js' );
-		
-		wp_enqueue_style( 'archimedes-custom', add_query_arg( array( 'archimedes_custom_styles' => true ), home_url( '/' ) ), array( 'archimedes-theme' ) );
-		
-		if ( is_singular() ) {
+		if ( is_singular() and comments_open() and get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
 		
