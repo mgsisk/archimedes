@@ -11,10 +11,23 @@ Tags: light, white, black, gray, two-columns, right-sidebar, fixed-width, flexib
 Webcomic: 4
 */
 
+/** 
+ * To ensure the Theme Customizer doesn't interfere with your own
+ * styles you should add any custom rules to the custom.css file.
+ */
+
+* { /** paulirish.com/2012/box-sizing-border-box-ftw */
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body {
 	background: #e8e8e8;
 	color: #333;
+	line-height: 1.4;
 	margin: 1rem;
+	text-rendering: optimizeLegibility; /** aestheticallyloyal.com/public/optimize-legibility */
 }
 
 ::-moz-selection {
@@ -69,6 +82,21 @@ dt {
 	font-weight: bold;
 }
 
+ol ol {
+	list-style: lower-alpha;
+}
+
+ol ol ol {
+	list-style: lower-roman;
+}
+
+nav ul,
+nav ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
 pre {
 	border: thin solid #ccc;
 	box-shadow: 0 .12rem .25rem rgba( 0, 0, 0, .25 ) inset;
@@ -83,6 +111,27 @@ table {
 td {
 	border: thin solid #ccc;
 	padding: .5rem;
+}
+
+textarea {
+	resize: vertical;
+}
+
+embed,
+iframe,
+object,
+video {
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+video {
+	height: auto;
 }
 
 #page {
@@ -123,12 +172,6 @@ td {
 	margin: 0;
 }
 
-#header nav {
-	border-color: #ccc;
-	border-style: solid;
-	border-width: thin 0;
-}
-
 #header nav:before,
 #header nav:after {
 	content: "";
@@ -139,28 +182,12 @@ td {
 	clear: both;
 }
 
-#header nav li {
-	position: relative;
+#header nav select {
+	width: 100%;
 }
 
-#header nav a {
-	border-bottom: thin dotted;
-	display: block;
-	line-height: 2;
-	padding: 0 1rem;
-	white-space: pre;
-}
-
-#header nav a:focus,
-#header nav a:hover,
-#header li:hover > a,
-#header .current_page_item a,
-#header .current_page_ancestor a {
-	color: #f68b1f;
-}
-
-#header nav a:active {
-	color: #cbdb2a;
+#header nav ul {
+	display: none;
 }
 
 #content:before,
@@ -173,7 +200,7 @@ td {
 	clear: both;
 }
 
-#main {
+main {
 	padding: 1rem;
 }
 
@@ -487,13 +514,28 @@ nav.post-pages {
 }
 
 @media only screen and ( min-width: 45em ) {
+	#header nav {
+		border-color: #ccc;
+		border-style: solid;
+		border-width: thin 0;
+	}
+	
 	#header nav ul ul {
 		display: none;
 		z-index: 99;
 	}
 	
+	#header nav select {
+		display: none;
+	}
+	
+	#header nav ul {
+		display: block;
+	}
+	
 	#header nav li {
 		float: left;
+		position: relative;
 	}
 	
 	#header nav li:hover > ul {
@@ -512,12 +554,28 @@ nav.post-pages {
 		float: none;
 	}
 	
-	#header nav a:link,
-	#header nav a:visited {
+	
+	#header nav a {
 		border: 0;
+		display: block;
+		line-height: 2;
+		padding: 0 1rem;
+		white-space: pre;
 	}
 	
-	#main {
+	#header nav a:focus,
+	#header nav a:hover,
+	#header li:hover > a,
+	#header .current_page_item a,
+	#header .current_page_ancestor a {
+		color: #f68b1f;
+	}
+	
+	#header nav a:active {
+		color: #cbdb2a;
+	}
+	
+	main {
 		float: left;
 		width: 62%;
 	}
@@ -526,57 +584,4 @@ nav.post-pages {
 		float: right;
 		width: 38%;
 	}
-}
-
-/** h5bp  */
-.wait {
-	cursor: wait;
-}
-
-.ir {
-    background-color: transparent;
-    border: 0;
-    color: transparent;
-    font: 0/0 a;
-    text-shadow: none;
-}
-
-.hide {
-    display: none !important;
-    visibility: hidden;
-}
-
-.mask {
-    visibility: hidden;
-}
-
-.ghost {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-.ghost.focus:active,
-.ghost.focus:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-}
-
-.cf:before,
-.cf:after {
-    content: "";
-    display: table;
-}
-
-.cf:after {
-    clear: both;
 }
