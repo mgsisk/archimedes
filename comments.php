@@ -2,9 +2,6 @@
 /** Comments template.
  * 
  * @package Archimedes
- * @uses archimedes_comments_nav()
- * @uses archimedes_start_coment()
- * @uses archimedes_end_coment()
  */
 ?>
 

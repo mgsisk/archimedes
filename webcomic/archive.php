@@ -6,20 +6,29 @@
  * using WordPress' normal template hierarhcy.
  * 
  * @package Archimedes
- * @see codex.wordpress.org/Template_Hierarchy
+ * @see github.com/mgsisk/webcomic/wiki/Templates
  */
 
-/** Reverse the order of Webcomic archive pages so older webcomics appear first.
- */
+/** Reverse the order of Webcomic archive pages so older webcomics appear first. */
 global $wp_query;
 
 query_posts( array_merge( $wp_query->query_vars, array( 'order' => 'ASC' ) ) );
-?>
 
-<section id="main" role="main">
+get_header(); ?>
+
+<main role="main">
 	<?php if ( have_posts() ) : ?>
 		<header class="page-header">
-			<?php if ( is_webcomic_storyline() ) : ?>
+			<?php if ( is_webcomic_crossover() ) : ?>
+				<hgroup>
+					<h1><?php printf( __( '%s Crossover Archive', 'archimedes' ), WebcomicTag::webcomic_term_title() ); ?></h1>
+					<?php if ( is_webcomic_storyline() ) : ?>
+						<h2><?php printf( __( 'Webcomics from %s', 'archimedes' ), WebcomicTag::webcomic_crossover_title() ) ?></h2>
+					<?php elseif ( is_webcomic_character() ) : ?>
+						<h2><?php printf( __( 'Appearances in %s', 'archimedes' ), WebcomicTag::webcomic_crossover_title() ) ?></h2>
+					<?php endif; ?>
+				</hgroup>
+			<?php elseif ( is_webcomic_storyline() ) : ?>
 				<hgroup>
 					<h1><?php _e( 'Webcomic Storyline Archive', 'archimedes' ) ?></h1>
 					<h2><?php webcomic_storyline_title(); ?></h2>
@@ -55,4 +64,7 @@ query_posts( array_merge( $wp_query->query_vars, array( 'order' => 'ASC' ) ) );
 	<?php else : ?>
 		<?php get_template_part( 'content-none', 'archive' ); ?>
 	<?php endif; ?>
-</section><!-- #main -->
+</main>
+
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

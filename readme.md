@@ -4,20 +4,16 @@ Archimedes is a barebones [Webcomic](http://webcomic.nu)-ready [WordPress](//wor
 
 ## Installation
 
-You can install Inkblot from the **Appearance > Themes > Install Themes** page in the administrative dashboard. Just do a search for `archimedes` and the first result should be the one you're looking for.
-
-### Manual Installation
-
-1. Download and extract Inkblot from the [WordPress Theme directory](//wordpress.org/extend/themes/archimedes).
-2. Upload the `archimedes` directory to your `wp-content/themes` directory.
-3. Activate Inkblot through the **Appearance > Themes** page in the administrative dashboard.
+1. Download and extract Archimedes from the [master GitHub repository](//github.com/mgsisk/archimedes).
+2. Upload the `archimedes–master` directory to your `wp-content/themes` directory.
+3. Activate Archimedes through the **Appearance > Themes** page in the administrative dashboard.
 
 ## Frequently Asked Questions
 
 ### Where can I get help with Webcomic (and Archimedes)?
 
 - [Support Forum](//groups.google.com/d/forum/webcomicnu)
-- [Inkblot Issue Tracker](//github.com/mgsisk/archimedes/issues)
+- [Archimedes Issue Tracker](//github.com/mgsisk/archimedes/issues)
 - [Beginner's Guide to Webcomic](//github.com/mgsisk/webcomic/wiki)
 - [Webcomic Video Tutorials](//vimeo.com/channels/webcomic)
 - [Webcomic Issue Tracker](//github.com/mgsisk/webcomic/issues)
@@ -25,7 +21,7 @@ You can install Inkblot from the **Appearance > Themes > Install Themes** page i
 
 ---
 
-Copyright 2008 - 2012 Michael Sisk (contact@mgsisk.com)
+Copyright 2008 - 2013 Michael Sisk (contact@mgsisk.com)
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 

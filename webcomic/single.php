@@ -6,16 +6,17 @@
  * separate `/webcomic/webcomic.php` template.
  * 
  * @package Archimedes
+ * @see github.com/mgsisk/webcomic/wiki/Templates
  */
 ?>
 
 <?php while ( have_posts() ) : the_post(); ?>
-	<div id="webcomic" class="post-webcomic">
+	<div id="webcomic" class="post-webcomic" data-webcomic-shortcuts data-webcomic-gestures>
 		<?php get_template_part( 'webcomic/webcomic', get_post_type() ); ?>
 	</div><!-- .post-webcomic -->
-	<section id="main" role="main">
+	<main role="main">
 		<?php get_template_part( 'webcomic/content', get_post_type() ); ?>
 		<?php webcomic_transcripts_template(); ?>
 		<?php comments_template( '', true ); ?>
-	</section><!-- #main -->
+	</main>
 <?php endwhile; ?>
