@@ -13,22 +13,12 @@ class ArchimedesAdmin extends Archimedes {
 	 * 
 	 * @uses Archimedes::$dir
 	 * @uses Archimedes::__construct()
-	 * @uses ArchimedesAdmin::admin_menu()
 	 * @uses ArchimedesAdmin::after_switch_theme()
 	 */
 	public function __construct() {
 		parent::__construct();
 		
-		add_action( 'admin_menu', array( $this, 'admin_menu' ), 99 );
 		add_action( 'after_switch_theme', array( $this, 'after_switch_theme' ) );
-	}
-	
-	/** Register customization page.
-	 * 
-	 * @hook admin_menu
-	 */
-	function admin_menu() {
-		add_theme_page( __( 'Customize', 'archimedes' ), __( 'Customize', 'archimedes' ), 'edit_theme_options', 'customize.php' );
 	}
 	
 	/** Activation hook.
