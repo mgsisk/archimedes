@@ -1,32 +1,30 @@
 <?php
-/** Webcomic index template.
+/** Webcomic home template.
  * 
  * This is the Webcomic-specific homepage template (used in place of
- * the normal `index.php` when Webcomic is active). The only real
- * difference between this template and the normal `index.php`
+ * the normal `home.php` or `index.php` when Webcomic is active).
+ * The only real difference between this template and the normal
  * template is the inclusion of a webcomic.
  * 
  * @package Archimedes
+ * @see github.com/mgsisk/webcomic/wiki/Templates
  */
 
-if ( !is_paged() ) {
-	$webcomics = new WP_Query( array(
-		'posts_per_page' => 1,
-		'post_type'      => get_webcomic_collections()
-	) );
-} else {
-	$webcomics = false;
-}
-?>
+$webcomics = !is_paged() ? new WP_Query( array(
+	'posts_per_page' => 1,
+	'post_type'      => get_webcomic_collections()
+) ) : false;
+
+get_header(); ?>
 
 <?php if ( $webcomics and $webcomics->have_posts() ) : ?>
 	<?php while ( $webcomics->have_posts() ) : $webcomics->the_post(); ?>
-		<div id="webcomic" class="post-webcomic" data-webcomic-container>
+		<div id="webcomic" class="post-webcomic" data-webcomic-shortcuts data-webcomic-gestures data-webcomic-container>
 			<?php get_template_part( 'webcomic/webcomic', get_post_type() ); ?>
 		</div><!-- .post-webcomic -->
 	<?php endwhile; $webcomics->rewind_posts(); ?>
 <?php endif; ?>
-<section id="main" role="main">
+<main role="main">
 	<?php if ( $webcomics and $webcomics->have_posts() ) : ?>
 		<?php while ( $webcomics->have_posts() ) : $webcomics->the_post(); ?>
 			<?php get_template_part( 'webcomic/content', get_post_type() ); ?>
@@ -55,4 +53,7 @@ if ( !is_paged() ) {
 	<?php else : ?>
 		<?php get_template_part( 'content', 'none' ); ?>
 	<?php endif; ?>
-</section><!-- #main -->
+</main>
+
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>
