@@ -140,7 +140,6 @@ class Archimedes {
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 		<title><?php wp_title( '|' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-		<link rel="author" href="<?php echo get_stylesheet_directory_uri(); ?>/humans.txt">
 		<?php
 	}
 	
