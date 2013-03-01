@@ -137,7 +137,7 @@ class ArchimedesTag extends Archimedes {
 		} else {
 			$meta = sprintf( __( 'Published%1$s%2$s%3$s%4$s<span class="post-actions">%5$s</span>', 'archimedes' ),
 				get_the_term_list( $post->ID, 'category', __( ' in ', 'archimedes' ), __( ', ', 'archimedes' ) ),
-				get_the_tag_list( __( ' and tagged ', 'archimedes' ), _( ', ', 'archimedes' ) ),
+				get_the_tag_list( __( ' and tagged ', 'archimedes' ), __( ', ', 'archimedes' ) ),
 				$date,
 				$author,
 				$edit
