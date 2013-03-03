@@ -99,7 +99,7 @@ class Archimedes {
 	 * @hook after_setup_theme
 	 */
 	public function after_setup_theme() {
-		load_theme_textdomain( 'archimedes', self::$dir . '-/locale' );
+		load_theme_textdomain( 'archimedes', self::$dir . '-/i18n' );
 		
 		add_editor_style();
 		
