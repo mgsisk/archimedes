@@ -1,27 +1,22 @@
-# Archimedes - A starter theme for Webcomic.
-
-Archimedes is a barebones [Webcomic](http://webcomic.nu)-ready [WordPress](//wordpress.org) theme named in honor of Nite Owl from the Watchmen graphic novel.
+Archimedes is a barebones [Inkblot](https://github.com/mgsisk/inkblot) child theme named in honor of Nite Owl from the Watchmen graphic novel.
 
 ## Installation
 
-1. Download and extract Archimedes from the [master GitHub repository](//github.com/mgsisk/archimedes).
-2. Upload the `archimedes–master` directory to your `wp-content/themes` directory.
-3. Activate Archimedes through the **Appearance > Themes** page in the administrative dashboard.
+1. Install [Inkblot](https://github.com/mgsisk/inkblot)
+2. Download and extract Archimedes from the [master GitHub repository](https://github.com/mgsisk/archimedes).
+3. Upload the `archimedes–master` directory to your `wp-content/themes` directory.
+4. Activate Archimedes through the **Appearance > Themes** page in the administrative dashboard.
 
 ## Frequently Asked Questions
 
-### Where can I get help with Webcomic (and Archimedes)?
+### Where can I get help with Archimedes?
 
-- [Support Forum](//groups.google.com/d/forum/webcomicnu)
-- [Archimedes Issue Tracker](//github.com/mgsisk/archimedes/issues)
-- [Beginner's Guide to Webcomic](//github.com/mgsisk/webcomic/wiki)
-- [Webcomic Video Tutorials](//vimeo.com/channels/webcomic)
-- [Webcomic Issue Tracker](//github.com/mgsisk/webcomic/issues)
-- [Email Support](mailto:support@webcomic.nu)
+- [Issue Tracker](https://github.com/mgsisk/archimedes/issues)
+- [Email Support](mailto:help@mgsisk.com)
 
 ---
 
-Copyright 2008 - 2013 Michael Sisk (contact@mgsisk.com)
+Copyright 2008 - 2015 Michael Sisk (contact@mgsisk.com)
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
