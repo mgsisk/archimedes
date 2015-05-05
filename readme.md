@@ -2,7 +2,7 @@ Archimedes is a barebones [Inkblot](https://github.com/mgsisk/inkblot) child the
 
 ## Installation
 
-1. Install [Inkblot](https://github.com/mgsisk/inkblot)
+1. Install [Inkblot](https://github.com/mgsisk/inkblot).
 2. Download and extract Archimedes from the [master GitHub repository](https://github.com/mgsisk/archimedes).
 3. Upload the `archimedes–master` directory to your `wp-content/themes` directory.
 4. Activate Archimedes through the **Appearance > Themes** page in the administrative dashboard.
