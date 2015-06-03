@@ -2,10 +2,9 @@
 
 Contributors: mgsisk
 Donate link: https://patreon.com/mgsisk
-Tags: light, white, black, gray, two-columns, right-sidebar, fixed-width, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
-Requires at least: 3.5
-Tested up to: 3.5.1
-Stable tag: 4
+Requires at least: 4.2
+Tested up to: 4.2
+Stable tag: 4.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
