@@ -6,7 +6,7 @@
  */
 
 add_action('wp_enqueue_scripts', 'archimedes_wp_enqueue_scripts');
-add_action('after_setup_theme', 'inkblot_after_setup_theme');
+add_action('after_setup_theme', 'archimedes_after_setup_theme');
 
 /**
  * Enqueue scripts and stylesheets.
